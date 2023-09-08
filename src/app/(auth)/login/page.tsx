@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import footerLinks from "./footer-links.json";
+import footerLinks from "../footer-links.json";
 import getAssetURL from "@/utils/getAssetURL";
 
 const inputClassname =
@@ -27,14 +27,16 @@ export default function LoginPage() {
       </div>
 
       <header className="p-4">
-        <Image
-          src="/netflix.svg"
-          alt="Netflix Logo"
-          width={100}
-          height={24}
-          priority
-          className="w-20 xs:w-40"
-        />
+        <Link href="/">
+          <Image
+            src="/netflix.svg"
+            alt="Netflix Logo"
+            width={100}
+            height={24}
+            priority
+            className="w-20 xs:w-40"
+          />
+        </Link>
       </header>
 
       {/* Card */}
@@ -43,12 +45,17 @@ export default function LoginPage() {
         style={{ backgroundColor: "rgba(0,0,0, 0.75)" }}
       >
         <h1 className="text-3xl font-semibold mb-4">Sign In</h1>
+        {/* TODO: This input accepts 'text' but should only accept either 'email' or 'phone' */}
         <input
           type="text"
           placeholder="Email or phone number"
           className={inputClassname}
         />
-        <input type="text" placeholder="Password" className={inputClassname} />
+        <input
+          type="password"
+          placeholder="Password"
+          className={inputClassname}
+        />
         <button className="mt-4 w-full bg-red-600 text-white p-3 rounded font-semibold text-base">
           Sign In
         </button>

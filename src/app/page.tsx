@@ -57,15 +57,19 @@ export default function Home() {
         {/* Container for Netflix Logo and Signin Button */}
         <div className="min-w-full flex justify-between">
           {/* Netflix Logo */}
-          <Image
-            src="/netflix.svg"
-            alt="Netflix Logo"
-            width={100}
-            height={24}
-            priority
-            className="w-24 lg:w-40"
-          />
-          <button className="bg-red-600 rounded py-1 px-4">Sign In</button>
+          <Link href="/">
+            <Image
+              src="/netflix.svg"
+              alt="Netflix Logo"
+              width={100}
+              height={24}
+              priority
+              className="w-24 lg:w-40"
+            />
+          </Link>
+          <Link href="/login">
+            <button className="bg-red-600 rounded py-1 px-4">Sign In</button>
+          </Link>
         </div>
 
         {/* Container for Text and Get Started */}
