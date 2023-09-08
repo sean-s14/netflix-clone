@@ -1,13 +1,9 @@
 import Image from "next/image";
-import { supabase } from "@/utils/supabase";
 import { AiOutlineRight } from "react-icons/ai";
 import Link from "next/link";
-import links from "./links.json";
+import links from "./footer-links.json";
 import FAQ from "@/components/faq";
-
-function getAssetURL(path: string): string {
-  return supabase.storage.from("main").getPublicUrl(path).data.publicUrl;
-}
+import getAssetURL from "@/utils/getAssetURL";
 
 // TODO: Change red colors to match netflix red
 
