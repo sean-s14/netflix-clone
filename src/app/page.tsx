@@ -2,6 +2,8 @@ import Image from "next/image";
 import { supabase } from "@/utils/supabase";
 import { AiOutlineRight } from "react-icons/ai";
 import Link from "next/link";
+import links from "./links.json";
+import FAQ from "@/components/faq";
 
 function getAssetURL(path: string): string {
   return supabase.storage.from("main").getPublicUrl(path).data.publicUrl;
@@ -13,11 +15,30 @@ function Hr() {
   return <hr className="w-full my-14 flex border-neutral-800 border-4" />;
 }
 
+function GetStarted() {
+  return (
+    <div className="w-full flex flex-col items-center justify-center sm:flex-row gap-2">
+      <input
+        type="text"
+        placeholder="Email address"
+        className="w-full sm:w-96 h-10 xs:h-14 p-4 rounded border border-neutral-400 text-neutral-100 outline-neutral-300"
+        style={{
+          backgroundColor: "rgba(23, 23, 23, 0.7)",
+        }}
+      />
+      <button className="flex justify-center items-center gap-1 w-full sm:w-40 h-10 xs:h-14 bg-red-600 text-white p-2 rounded font-semibold text-lg">
+        <p>Get Started</p>
+        <AiOutlineRight />
+      </button>
+    </div>
+  );
+}
+
 export default function Home() {
   return (
     <main className="min-h-screen h-screen min-w-full flex flex-col items-center">
       {/* Container div */}
-      <div className="relative w-screen min-h-[480px] sm:h-3/5 lg:h-3/4 p-6 xs:p-8 flex flex-col items-center">
+      <div className="relative w-full min-h-[480px] lg:min-h-[75%] p-6 xs:p-8 flex flex-col items-center">
         {/* Background Image */}
         <Image
           src={getAssetURL("home/unauthenticated/img/main-2.jpg")}
@@ -65,20 +86,7 @@ export default function Home() {
           </p>
 
           {/* Get Started (email input + 'get started' button) */}
-          <div className="w-[90%] xs:w-[80%] flex flex-col sm:flex-row gap-2">
-            <input
-              type="text"
-              placeholder="Email address"
-              className="w-full sm:w-96 h-10 xs:h-14 p-4 rounded border border-neutral-400 text-neutral-100"
-              style={{
-                backgroundColor: "rgba(23, 23, 23, 0.7)",
-              }}
-            />
-            <button className="flex justify-center items-center gap-1 w-full sm:w-40 h-10 xs:h-14 bg-red-600 text-white p-2 rounded font-semibold text-lg">
-              <p>Get Started</p>
-              <AiOutlineRight />
-            </button>
-          </div>
+          <GetStarted />
         </div>
       </div>
 
@@ -211,7 +219,7 @@ export default function Home() {
 
       <Hr />
 
-      {/* Section 4 (Watch Everywhere) */}
+      {/* Section 4 (Download your programmes to watch offline) */}
       <section className="w-[90%] mt-10 flex flex-col lg:flex-row-reverse items-center gap-6 lg:gap-16">
         <div className="flex flex-col gap-6 text-center lg:text-left">
           <h2 className="text-3xl lg:text-5xl font-bold">
@@ -250,7 +258,7 @@ export default function Home() {
               alt="Download gif"
               width={100}
               height={100}
-              className="h-auto w-auto ml-20"
+              className="h-auto w-auto ml-0 xs:ml-20"
             />
           </div>
         </div>
@@ -259,11 +267,56 @@ export default function Home() {
       <Hr />
 
       {/* Section 5 (Frequently Asked Questions) */}
-      <section>
-        <h2 className="text-3xl lg:text-5xl font-bold">
+      <section className="w-full lg:w-[95%] p-4 flex flex-col items-center">
+        <h2 className="text-3xl lg:text-5xl font-bold mb-10 text-center">
           Frequently Asked Questions
         </h2>
+
+        <div className="w-full flex flex-col gap-2 mb-12">
+          <FAQ />
+        </div>
+
+        <div className="w-fit">
+          <p className="text-lg lg:text-xl mb-6 text-center">
+            Ready to watch? Enter your email to create or restart your
+            membership.
+          </p>
+
+          <GetStarted />
+        </div>
       </section>
+
+      <Hr />
+
+      {/* Footer */}
+      <footer className="w-full flex flex-col gap-6 px-6 lg:p-10 items-start text-neutral-400">
+        {/* Contact */}
+        <p>Questions? Call 0808 196 5391</p>
+
+        {/* Links */}
+        <div className="flex flex-col gap-2 xs:flex-row flex-wrap">
+          {links.map(({ title, url }, index) => (
+            <Link
+              key={index}
+              href={url}
+              className="underline text-sm hover:text-white min-w-[200px]"
+            >
+              {title}
+            </Link>
+          ))}
+        </div>
+
+        {/* Language */}
+        <select
+          name=""
+          id=""
+          className="bg-neutral-950 text-neutral-300 border border-neutral-500 outline-neutral-300 px-3 py-1 rounded w-fit"
+        >
+          <option value="">English</option>
+        </select>
+
+        <p className="mb-10">Netflix United Kingdom</p>
+      </footer>
     </main>
   );
 }
