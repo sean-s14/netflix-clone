@@ -10,7 +10,7 @@ enum MaturityRating {
 
 interface IProfile {
   _id?: Types.ObjectId;
-  user: Types.ObjectId;
+  account: Types.ObjectId;
   name: string;
   language: string;
   viewingRestrictions: {

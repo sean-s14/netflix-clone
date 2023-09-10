@@ -23,7 +23,7 @@ async function connect() {
     cached.promise = mongoose
       .connect(URI, {
         bufferCommands: false,
-        useCreateIndex: true,
+        // useCreateIndex: true,
         useNewUrlParser: true,
         useUnifiedTopology: true,
       } as ConnectOptions)

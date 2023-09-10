@@ -5,6 +5,7 @@ interface IAccount {
   profile: Types.ObjectId[];
   email: string;
   password: string;
+  salt: string;
   phone?: string;
   createdAt?: Date;
   updatedAt?: Date;

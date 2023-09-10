@@ -28,8 +28,10 @@ const accountSchema = new Schema<IAccount>(
     password: {
       type: String,
       required: true,
-      minlength: [8, "Password must be at least 8 characters long"],
-      maxlength: [32, "Password must be at most 32 characters long"],
+    },
+    salt: {
+      type: String,
+      required: true,
     },
     phone: String,
   },

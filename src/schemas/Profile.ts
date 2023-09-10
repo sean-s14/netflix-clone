@@ -5,7 +5,7 @@ mongoose.Promise = global.Promise;
 
 const profileSchema = new Schema<IProfile>(
   {
-    user: {
+    account: {
       type: Schema.Types.ObjectId,
       ref: "Account",
       required: true,
@@ -18,8 +18,8 @@ const profileSchema = new Schema<IProfile>(
     },
     language: {
       type: String,
-      required: true,
       enum: ["en", "fr", "es", "de", "it", "pt"],
+      default: "en",
     },
     viewingRestrictions: {
       maturityRating: {
