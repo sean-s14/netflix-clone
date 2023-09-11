@@ -1,12 +1,77 @@
+"use client";
+import { useState, useReducer } from "react";
+import { useRouter } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import footerLinks from "../footer-links.json";
 import getAssetURL from "@/utils/getAssetURL";
+import { CgSpinnerTwo } from "react-icons/cg";
 
 const inputClassname =
   "rounded p-4 outline-neutral-300 bg-neutral-700 text-neutral-50";
 
+interface FormValues {
+  email: string;
+  password: string;
+}
+
+const defaultFormValues: FormValues = {
+  email: "",
+  password: "",
+};
+
+const formReducer = (
+  state: FormValues,
+  action: { type: string; payload: string }
+) => {
+  switch (action.type) {
+    case "email":
+      return { ...state, email: action.payload };
+    case "password":
+      return { ...state, password: action.payload };
+    default:
+      return state;
+  }
+};
+
 export default function LoginPage() {
+  const router = useRouter();
+  const [formState, formDispatch] = useReducer(formReducer, defaultFormValues);
+  const [error, setError] = useState<string | null>(null);
+  const [errorFields, setErrorFields] = useState<string[]>([]);
+  const [loading, setLoading] = useState(false);
+
+  function handleInputChange(event: React.ChangeEvent<HTMLInputElement>) {
+    formDispatch({ type: event.target.name, payload: event.target.value });
+  }
+
+  function onSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    setLoading(true);
+
+    fetch("/api/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(formState),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setLoading(false);
+        if (data.error) {
+          console.error(data.error);
+          setError(data.error);
+          setErrorFields(data.fields);
+        } else {
+          router.push("/");
+        }
+      })
+      .catch((error) => {
+        console.error("Error: ", error);
+        setLoading(false);
+        setError(error.message);
+      });
+  }
+
   return (
     <main className="flex flex-col justify-between min-h-screen">
       {/* Background Image */}
@@ -26,6 +91,7 @@ export default function LoginPage() {
         ></div>
       </div>
 
+      {/* Netflix Logo */}
       <header className="p-4">
         <Link href="/">
           <Image
@@ -39,26 +105,72 @@ export default function LoginPage() {
         </Link>
       </header>
 
-      {/* Card */}
-      <div
+      {/* Form */}
+      <form
         className="p-8 md:p-14 flex flex-col gap-4 w-full max-w-full md:max-w-[450px] self-center rounded"
         style={{ backgroundColor: "rgba(0,0,0, 0.75)" }}
+        onSubmit={onSubmit}
       >
+        {/* Title */}
         <h1 className="text-3xl font-semibold mb-4">Sign In</h1>
+
+        {/* Error Message */}
+        {error && (
+          <div className="bg-amber-600 text-white py-2 px-5 font-normal rounded text-sm text-start">
+            {error}
+          </div>
+        )}
+
         {/* TODO: This input accepts 'text' but should only accept either 'email' or 'phone' */}
+
+        {/* Email */}
         <input
-          type="text"
+          required
+          type="email"
+          name="email"
           placeholder="Email or phone number"
-          className={inputClassname}
+          value={formState.email}
+          className={
+            inputClassname +
+            (errorFields?.includes("email")
+              ? " border-b-2 border-amber-600"
+              : "")
+          }
+          onChange={handleInputChange}
+          autoComplete="email"
         />
+
+        {/* Password */}
         <input
+          required
           type="password"
+          name="password"
           placeholder="Password"
-          className={inputClassname}
+          value={formState.password}
+          className={
+            inputClassname +
+            (errorFields?.includes("password")
+              ? " border-b-2 border-amber-600"
+              : "")
+          }
+          onChange={handleInputChange}
+          autoComplete="current-password"
         />
-        <button className="mt-4 w-full bg-red-600 text-white p-3 rounded font-semibold text-base">
-          Sign In
+
+        {/* Sign In Button */}
+        <button
+          className={`mt-4 w-full ${
+            loading ? "bg-red-800" : "bg-red-600"
+          } text-white p-3 rounded font-semibold text-base flex justify-center`}
+          disabled={loading}
+        >
+          {loading ? (
+            <CgSpinnerTwo fontSize="24" className="animate-spin" />
+          ) : (
+            "Sign In"
+          )}
         </button>
+
         <div className="flex justify-between">
           {/* "Remember me" checkbox */}
           <div className="flex gap-2">
@@ -77,6 +189,7 @@ export default function LoginPage() {
           <p className="text-sm text-neutral-300">Need Help?</p>
         </div>
 
+        {/* Link to Signup page */}
         <div className="mt-4 xs:mt-10">
           <div className="text-base text-neutral-400">
             <span>New to Netflix? </span>
@@ -86,7 +199,7 @@ export default function LoginPage() {
             <span>.</span>
           </div>
         </div>
-      </div>
+      </form>
 
       <hr className="w-full mt-10 mb-4 flex border-neutral-800 border md:border-none" />
 
