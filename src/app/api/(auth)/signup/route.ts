@@ -12,12 +12,29 @@ export async function POST(req: NextRequest) {
     const { name, email, password, password2 } = await req.json();
 
     if (!name || !email || !password || !password2) {
-      return NextResponse.json({ error: "Missing fields" }, { status: 400 });
+      const fields = [];
+      if (!name) fields.push("name");
+      if (!email) fields.push("email");
+      if (!password) fields.push("password");
+      if (!password2) fields.push("password2");
+      return NextResponse.json(
+        { error: "Missing fields", fields },
+        { status: 400 }
+      );
+    }
+
+    // Check if email is already in use
+    const existingAccount = await Account.findOne({ email });
+    if (existingAccount) {
+      return NextResponse.json(
+        { error: "Email is already in use", fields: ["email"] },
+        { status: 400 }
+      );
     }
 
     if (password !== password2) {
       return NextResponse.json(
-        { error: "Passwords do not match" },
+        { error: "Passwords do not match", fields: ["password", "password2"] },
         { status: 400 }
       );
     }
@@ -33,7 +50,7 @@ export async function POST(req: NextRequest) {
 
     if (!account) {
       return NextResponse.json(
-        { error: "Something went wrong" },
+        { error: "Failed to create account" },
         { status: 500 }
       );
     }
@@ -47,7 +64,7 @@ export async function POST(req: NextRequest) {
     if (!profile) {
       await Account.deleteOne({ _id: account._id });
       return NextResponse.json(
-        { error: "Something went wrong" },
+        { error: "Failed to create profile" },
         { status: 500 }
       );
     }

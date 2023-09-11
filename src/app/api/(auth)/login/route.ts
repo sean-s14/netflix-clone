@@ -18,7 +18,11 @@ export async function POST(req: NextRequest) {
     const account = await Account.findOne({ email });
     if (!account) {
       return NextResponse.json(
-        { error: "Invalid credentials" },
+        {
+          error:
+            "Sorry, we can't find an account with this email address. Please try again or create a new account.",
+          fields: ["email"],
+        },
         { status: 400 }
       );
     }
@@ -26,7 +30,11 @@ export async function POST(req: NextRequest) {
     const isMatch = await bcrypt.compare(password, account.password);
     if (!isMatch) {
       return NextResponse.json(
-        { error: "Invalid Credentials" },
+        {
+          error:
+            "Incorrect password. Please try again or you can reset your password.",
+          fields: ["password"],
+        },
         { status: 400 }
       );
     }
@@ -53,7 +61,9 @@ export async function POST(req: NextRequest) {
       { message: "Success" },
       {
         status: 200,
-        headers: { "Set-Cookie": `token=${token};Path=/;Expires=${tomorrow}` },
+        headers: {
+          "Set-Cookie": `authToken=${token};Path=/;Expires=${tomorrow}`,
+        },
       }
     );
   } catch (err) {
