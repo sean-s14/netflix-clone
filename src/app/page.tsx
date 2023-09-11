@@ -4,30 +4,12 @@ import Link from "next/link";
 import links from "./footer-links.json";
 import FAQ from "@/components/faq";
 import getAssetURL from "@/utils/getAssetURL";
+import GetStarted from "@/components/getStarted";
 
 // TODO: Change red colors to match netflix red
 
 function Hr() {
   return <hr className="w-full my-14 flex border-neutral-800 border-4" />;
-}
-
-function GetStarted() {
-  return (
-    <div className="w-full flex flex-col items-center justify-center sm:flex-row gap-2">
-      <input
-        type="text"
-        placeholder="Email address"
-        className="w-full sm:w-96 h-10 xs:h-14 p-4 rounded border border-neutral-400 text-neutral-100 outline-neutral-300"
-        style={{
-          backgroundColor: "rgba(23, 23, 23, 0.7)",
-        }}
-      />
-      <button className="flex justify-center items-center gap-1 w-full sm:w-40 h-10 xs:h-14 bg-red-600 text-white p-2 rounded font-semibold text-lg">
-        <p>Get Started</p>
-        <AiOutlineRight />
-      </button>
-    </div>
-  );
 }
 
 export default function Home() {
