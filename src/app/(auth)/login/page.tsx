@@ -62,7 +62,7 @@ export default function LoginPage() {
           setError(data.error);
           setErrorFields(data.fields);
         } else {
-          router.push("/");
+          router.push("/browse");
         }
       })
       .catch((error) => {
