@@ -3,16 +3,18 @@ import { useState, useEffect, useRef } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
-import { AiFillCaretDown } from "react-icons/ai";
+
+import {
+  MdNotificationsNone,
+  MdOutlineSwapHorizontalCircle,
+} from "react-icons/md";
+import { AiFillCaretDown, AiOutlineUser } from "react-icons/ai";
+import { FiEdit2, FiHelpCircle } from "react-icons/fi";
 import { BiSearch } from "react-icons/bi";
-import { MdNotificationsNone } from "react-icons/md";
-import { FiEdit2 } from "react-icons/fi";
-import { AiOutlineUser } from "react-icons/ai";
-import { FiHelpCircle } from "react-icons/fi";
-import { MdOutlineSwapHorizontalCircle } from "react-icons/md";
+import { IconType } from "react-icons";
+
 import getAssetURL from "@/utils/getAssetURL";
 import DesktopDropdown from "@/components/dropdown/desktopDropdown";
-import { IconType } from "react-icons";
 
 const navLinks = [
   { title: "Home", href: "/browse" },
@@ -161,7 +163,7 @@ export default function DesktopNav() {
         {/* TODO: Update Links */}
         {/* Nav Links (> 1024px) */}
         <div className="hidden lg:flex items-center gap-2 cursor-pointer">
-          <ul className="flex items-center gap-6 text-sm">
+          <ul className="flex items-center gap-5 text-sm">
             {navLinks.map(({ title, href }) => (
               <li key={title}>
                 <Link href={href}>{title}</Link>
@@ -177,9 +179,9 @@ export default function DesktopNav() {
         <div
           className={
             `transition-all duration-500 ease-in-out ${
-              searchBarOpen ? "w-80" : "w-10"
-            } h-full border border-neutral-100 border-opacity-0 bg-neutral-950/90 rounded-none hidden xs:flex items-center justify-center gap-2 py-1 ` +
-            (searchBarOpen && "border-opacity-100 px-2")
+              searchBarOpen ? "w-80 lg:w-52 xl:w-96" : "w-10"
+            } h-full border border-neutral-100 border-opacity-0 rounded-none hidden xs:flex items-center justify-center gap-2 py-1 ` +
+            (searchBarOpen && "border-opacity-100 px-2 bg-neutral-950/90")
           }
         >
           {/* Search Icon */}
@@ -196,9 +198,14 @@ export default function DesktopNav() {
             id="search"
             placeholder="Titles, people, genres"
             className={`${
-              searchBarOpen ? "w-80" : "w-0"
-            } transition-all duration-500 ease-in-out bg-transparent border-none h-full text-neutral-100 outline-none z-10 `}
+              searchBarOpen ? "w-80 lg:w-40 xl:w-96" : "w-0"
+            } text-base lg:text-sm xl:text-base transition-all duration-500 ease-in-out bg-transparent border-none h-full text-neutral-100 outline-none z-10 `}
           />
+        </div>
+
+        {/* Link to Children Page */}
+        <div className="hidden lg:flex">
+          <Link href="/browse">Children</Link>
         </div>
 
         {/* Notifications */}
@@ -212,14 +219,17 @@ export default function DesktopNav() {
 
         {/* Profile Management */}
         <div className="cursor-pointer [&>div]:hover:opacity-100 [&>div]:hover:pointer-events-auto">
-          <Image
-            src={getAssetURL("profile/blue.png")}
-            alt="Profile Image"
-            width={30}
-            height={30}
-            priority
-            className="rounded"
-          />
+          <div className="flex items-center gap-2 [&>svg]:hover:rotate-180">
+            <Image
+              src={getAssetURL("profile/blue.png")}
+              alt="Profile Image"
+              width={30}
+              height={30}
+              priority
+              className="rounded"
+            />
+            <AiFillCaretDown className="hidden lg:flex transition-transform duration-300" />
+          </div>
           <DesktopDropdown
             direction="right-0"
             topBorder={false}

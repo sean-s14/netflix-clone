@@ -238,6 +238,7 @@ export default function MobileNav() {
           menuOpen ? "" : "-translate-x-full"
         } transition-all duration-100 ease-linear flex-col gap-2 bg-neutral-950 text-neutral-400 font-semibold overflow-y-scroll no-scrollbar`}
         style={{
+          minHeight: "calc(100vh - 3.5rem)",
           maxHeight: "calc(100vh - 3.5rem)",
         }}
       >
