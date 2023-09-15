@@ -1,41 +1,63 @@
 import Link from "next/link";
-import Image from "next/image";
+import MediaList from "@/components/mediaList";
+import { tmdbBaseUrl, discoverMovieUrl, discoverTvUrl } from "@/constants/tmdb";
 
-const tempTitles = [
-  "Oscar-winning Visually-striking Historical Movies",
-  "Trending Now",
-  "Continue Watching for Sean",
-  "Dark Suspenseful Psychological TV Dramas",
-  "Gory US TV Shows",
-  "Teen TV Sci-Fi & Fantasy",
-  "Binge-worthy European TV Suspense Dramas",
+type Section = {
+  title: string;
+  url: string;
+  mediaType?: "tv" | "movie";
+};
+
+const sections: Section[] = [
+  {
+    title: "Trending Now",
+    url: "trending/all/week?language=en-US",
+    mediaType: undefined,
+  },
+  {
+    title: "Action in Movies",
+    url: discoverMovieUrl + "&with_genres=28",
+    mediaType: "movie",
+  },
+  {
+    title: "Animation in TV",
+    url: discoverTvUrl + "&with_genres=16",
+    mediaType: "tv",
+  },
+  {
+    title: "Fantasy in Movies",
+    url: discoverMovieUrl + "&with_genres=14",
+    mediaType: "movie",
+  },
+  {
+    title: "Crime in TV",
+    url: discoverTvUrl + "&with_genres=80",
+    mediaType: "tv",
+  },
+  {
+    title: "Science Fiction in Movies",
+    url: discoverMovieUrl + "&with_genres=878",
+    mediaType: "movie",
+  },
+  {
+    title: "War & Politics in TV",
+    url: discoverTvUrl + "&with_genres=10768",
+    mediaType: "tv",
+  },
 ];
 
-export default function BrowsePage() {
+export default async function BrowsePage() {
   return (
     <main className="flex flex-col bg-neutral-900 text-neutral-400">
       {/* Main Content */}
       <div className="flex flex-col gap-8 text-xl font-semibold py-2 xs:py-10 px-5 xs:px-8">
-        {tempTitles.map((title, index) => (
-          <div key={index} className="flex flex-col gap-1">
-            {/* Title */}
-            <h2>{title}</h2>
-
-            {/* Movie Selection */}
-            <div className="flex gap-2 overflow-auto no-scrollbar">
-              {/* TODO: Replace with movies from TMDB */}
-              {Array.from(Array(8).keys()).map((_, index) => (
-                <Image
-                  key={index}
-                  src="/temp/images/1899.jpg"
-                  alt="Movie Poster"
-                  width={250}
-                  height={140}
-                  className="min-w-[45%] xs:min-w-[30%] md:min-w-[22%] lg:min-w-[18%] xl:min-w-[15%] 2xl:min-w-[12%]"
-                />
-              ))}
-            </div>
-          </div>
+        {sections.map(({ title, url, mediaType }, index) => (
+          <MediaList
+            key={index}
+            title={title}
+            url={tmdbBaseUrl + url}
+            mediaType={mediaType}
+          />
         ))}
       </div>
 
