@@ -50,7 +50,7 @@ export async function getMedia(url: string, mediaType?: "tv" | "movie") {
 
     return { data: data2, error: null };
   } catch (error) {
-    console.log(error);
+    console.error(error);
     return { data: [], error };
   }
 }

@@ -62,7 +62,6 @@ export default function SignupPage() {
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    console.log(formState);
     setLoading(true);
 
     // Create POST fetch request to /api/signup
@@ -80,7 +79,6 @@ export default function SignupPage() {
           setError(data.error);
           setErrorFields(data.fields);
         } else {
-          console.log(data);
           router.push("/login");
         }
         setLoading(false);

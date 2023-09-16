@@ -9,7 +9,6 @@ export default function Footer() {
 
   useEffect(() => {
     if (typeof window !== "undefined") {
-      console.log("User-Agent:", window.navigator.userAgent);
       setUserAgent(window.navigator.userAgent);
     }
   }, []);

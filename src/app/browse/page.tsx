@@ -1,4 +1,3 @@
-import Link from "next/link";
 import MediaList from "@/components/mediaList";
 import { tmdbBaseUrl, discoverMovieUrl, discoverTvUrl } from "@/constants/tmdb";
 
@@ -46,7 +45,7 @@ const sections: Section[] = [
   },
 ];
 
-export default async function BrowsePage() {
+export default function BrowsePage() {
   return (
     <main className="flex flex-col bg-neutral-900 text-neutral-400">
       {/* Main Content */}
@@ -60,25 +59,6 @@ export default async function BrowsePage() {
           />
         ))}
       </div>
-
-      {/* TODO: Update links */}
-      {/* Footer */}
-      <footer className="px-5 xs:px-8 py-5">
-        <ul className="flex flex-wrap gap-2 gap-y-3 [&>li]:min-w-[160px]">
-          <li>
-            <Link href="/browse">Terms of Use</Link>
-          </li>
-          <li>
-            <Link href="/browse">Privacy Statement</Link>
-          </li>
-          <li>
-            <Link href="/browse">Cookie Preferences</Link>
-          </li>
-          <li>
-            <Link href="/browse">Help Centre</Link>
-          </li>
-        </ul>
-      </footer>
     </main>
   );
 }
