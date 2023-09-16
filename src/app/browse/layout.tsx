@@ -1,4 +1,5 @@
-import MobileNav from "@/components/navigation/mobile/mobileNav";
+import Footer from "@/components/footer/footer";
+import Navigation from "@/components/navigation/navigation";
 
 export default function BrowseLayout({
   children,
@@ -7,8 +8,9 @@ export default function BrowseLayout({
 }) {
   return (
     <>
-      <MobileNav />
+      <Navigation />
       {children}
+      <Footer />
     </>
   );
 }
