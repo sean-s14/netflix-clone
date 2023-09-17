@@ -49,7 +49,7 @@ export default function BrowsePage() {
   return (
     <main className="flex flex-col bg-neutral-900 text-neutral-400">
       {/* Main Content */}
-      <div className="flex flex-col gap-8 text-xl font-semibold py-2 xs:py-10 px-5 xs:px-8">
+      <div className="flex flex-col gap-8 text-xl font-semibold py-2 xs:py-10 pl-5 xs:pl-8">
         {sections.map(({ title, url, mediaType }, index) => (
           <MediaList
             key={index}

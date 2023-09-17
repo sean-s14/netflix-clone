@@ -1,5 +1,5 @@
-import Image from "next/image";
-import { tmdbImageBaseUrl, tmdbBaseUrl } from "@/constants/tmdb";
+import { tmdbBaseUrl } from "@/constants/tmdb";
+import MediaSlider from "@/components/mediaSlider";
 
 type Response = {
   page: number;
@@ -74,19 +74,7 @@ export default async function MediaList({
       <h2>{title}</h2>
 
       {/* Movie Selection */}
-      <div className="flex gap-2 overflow-auto no-scrollbar">
-        {data?.map(({ id, backdrop_path }, index) => (
-          <Image
-            key={index}
-            src={tmdbImageBaseUrl + "w500" + backdrop_path}
-            alt="Movie Poster"
-            width={250}
-            height={140}
-            priority
-            className="min-w-[45%] xs:min-w-[30%] md:min-w-[22%] lg:min-w-[18%] xl:min-w-[15%] 2xl:min-w-[12%]"
-          />
-        ))}
-      </div>
+      <MediaSlider data={data} />
     </div>
   );
 }
