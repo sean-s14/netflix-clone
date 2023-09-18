@@ -91,7 +91,9 @@ export default function DesktopFooter() {
       <ul className="flex items-center gap-4">
         {socialMedia.map(({ icon: Icon, url }, index) => (
           <li key={index}>
-            <Icon size={24} className="text-neutral-100" />
+            <Link href={"/browse"}>
+              <Icon size={24} className="text-neutral-100" />
+            </Link>
           </li>
         ))}
       </ul>

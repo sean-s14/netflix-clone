@@ -71,7 +71,7 @@ export default async function MediaList({
   return (
     <div className="flex flex-col gap-1">
       {/* Title */}
-      <h2>{title}</h2>
+      <h2 className="text-neutral-100">{title}</h2>
 
       {/* Movie Selection */}
       <MediaSlider data={data} />

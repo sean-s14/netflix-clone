@@ -110,7 +110,7 @@ export default function DesktopNav() {
   }
 
   const navBgColor = isSticky
-    ? "bg-gradient-to-b from-neutral-950 to-neutral-950/50"
+    ? "bg-gradient-to-b from-neutral-950 to-neutral-950/0"
     : "bg-neutral-950";
 
   return (
