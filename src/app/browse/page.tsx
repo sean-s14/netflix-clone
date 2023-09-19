@@ -1,5 +1,6 @@
 import MediaList from "@/components/mediaList";
 import { tmdbBaseUrl, discoverMovieUrl, discoverTvUrl } from "@/constants/tmdb";
+import VideoPlayer from "@/components/videoPlayer";
 
 type Section = {
   title: string;
@@ -48,8 +49,11 @@ const sections: Section[] = [
 export default function BrowsePage() {
   return (
     <main className="flex flex-col bg-neutral-900 text-neutral-400">
+      {/* Video */}
+      <VideoPlayer />
+
       {/* Main Content */}
-      <div className="flex flex-col gap-8 text-xl font-semibold py-2 xs:py-10 pl-5 xs:pl-8">
+      <div className="flex flex-col gap-8 z-10 text-xl font-semibold py-2 xs:py-10 pl-5 xs:pl-8 -mt-[90px]">
         {sections.map(({ title, url, mediaType }, index) => (
           <MediaList
             key={index}
