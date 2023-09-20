@@ -8,7 +8,7 @@ export default function BrowseLayout({
 }) {
   return (
     <>
-      <div className="fixed z-10 w-full">
+      <div className="fixed z-50 w-full">
         <Navigation />
       </div>
       {children}
