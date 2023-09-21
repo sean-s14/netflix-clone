@@ -3,6 +3,7 @@ import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { tmdbImageBaseUrl } from "@/constants/tmdb";
 import { BsChevronCompactLeft, BsChevronCompactRight } from "react-icons/bs";
+import MediaCard from "@/components/mediaCard/mediaCard";
 
 const breakpoints = {
   // 2
@@ -102,7 +103,7 @@ export default function MediaSlider({ data }: { data: any[] }) {
   return (
     <div className="flex relative [&>#slide-count]:hover:flex">
       <div
-        className={`flex relative w-full overflow-auto no-scrollbar select-none [&>#slide-count]:hover:flex [&>#right-shift]:hover:flex ${
+        className={`flex w-full no-scrollbar overflow-y-visible overflow-x-clip select-none [&>#slide-count]:hover:flex [&>#right-shift]:hover:flex ${
           translateX < 0 && "[&>#left-shift]:hover:flex"
         }`}
       >
@@ -124,26 +125,22 @@ export default function MediaSlider({ data }: { data: any[] }) {
             transitionTimingFunction: "cubic-bezier(0, 0, 0.58, 1)",
           }}
         >
-          <Image
-            ref={firstImage}
-            key={data[0].id}
-            src={tmdbImageBaseUrl + "w780" + data[0].backdrop_path}
-            alt="Movie Poster"
-            width={250}
-            height={140}
-            priority
-            className="min-w-[45%] xs:min-w-[30%] md:min-w-[23%] lg:min-w-[18.5%] xl:min-w-[15.5%] 2xl:min-w-[13.3%]"
-          />
-          {data.slice(1)?.map(({ id, backdrop_path }) => (
-            <Image
-              key={id}
-              src={tmdbImageBaseUrl + "w780" + backdrop_path}
-              alt="Movie Poster"
-              width={250}
-              height={140}
-              priority
-              className="min-w-[45%] xs:min-w-[30%] md:min-w-[23%] lg:min-w-[18.5%] xl:min-w-[15.5%] 2xl:min-w-[13.3%]"
-            />
+          {data?.map((media, index) => (
+            <div
+              key={media.id}
+              className={`group relative min-w-[45%] xs:min-w-[30%] md:min-w-[23%] lg:min-w-[18.5%] xl:min-w-[15.5%] 2xl:min-w-[13.3%]`}
+            >
+              <MediaCard media={media} />
+              <Image
+                ref={index === 0 ? firstImage : null}
+                src={tmdbImageBaseUrl + "w780" + media.backdrop_path}
+                alt="Movie Poster"
+                width={250}
+                height={140}
+                priority
+                className={`w-full [&+#media-card-${media.id}]:hover:flex`}
+              />
+            </div>
           ))}
         </div>
 

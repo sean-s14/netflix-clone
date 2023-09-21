@@ -40,41 +40,47 @@ export default function VideoPlayer() {
   return (
     <div className="relative w-full h-fit max-h-screen">
       {/* Movie Details */}
-      {!isPlaying && (
-        <div className="z-20 flex flex-col gap-4 absolute left-10 bottom-20">
-          {/* Logo */}
-          <Image
-            src={getAssetURL("browse/justice-league-logo.png")}
-            alt="Logo"
-            width={300}
-            height={50}
-            className="w-40 sm:w-52 md:w-64 lg:w-80"
-          />
+      <div className="z-20 flex flex-col gap-4 absolute left-10 bottom-20">
+        {/* Logo */}
+        <Image
+          src={getAssetURL("browse/justice-league-logo.png")}
+          alt="Logo"
+          width={300}
+          height={50}
+          className={`transition-all duration-1000 ${
+            isPlaying
+              ? "w-36 sm:w-44 md:w-52 lg:w-56"
+              : "w-40 sm:w-52 md:w-64 lg:w-80"
+          } `}
+        />
 
-          {/* Description */}
-          <p className="w-[500px] md:w-[700px] text-sm sm:text-base text-neutral-100">
-            Determined to ensure Superman&#39;s ultimate sacrifice was not in
-            vain, Bruce Wayne aligns forces with Diana Prince with plans to
-            recruit a team of metahumans to protect the world from an
-            approaching threat of catastrophic proportions.
-          </p>
+        {/* Description */}
+        <p
+          className={`transition-all duration-1000 overflow-hidden w-[500px] md:w-[700px] text-sm sm:text-base text-neutral-100 ${
+            isPlaying ? "max-h-0" : "max-h-[120px]"
+          }`}
+        >
+          Determined to ensure Superman&#39;s ultimate sacrifice was not in
+          vain, Bruce Wayne aligns forces with Diana Prince with plans to
+          recruit a team of metahumans to protect the world from an approaching
+          threat of catastrophic proportions.
+        </p>
 
-          {/* Buttons */}
-          <div className="flex gap-4">
-            {/* Play */}
-            <button className="flex items-center justify-center gap-2 w-32 h-12 bg-neutral-100 hover:bg-neutral-100/80 rounded-md text-neutral-950 font-semibold text-lg">
-              <FaPlay size={24} />
-              <span>Play</span>
-            </button>
+        {/* Buttons */}
+        <div className="flex gap-4">
+          {/* Play */}
+          <button className="flex items-center justify-center gap-2 w-32 h-12 bg-neutral-100 hover:bg-neutral-100/80 rounded-md text-neutral-950 font-semibold text-lg">
+            <FaPlay size={24} />
+            <span>Play</span>
+          </button>
 
-            {/* More Info */}
-            <button className="flex items-center justify-center gap-2 w-40 h-12 bg-neutral-500/80 hover:bg-neutral-500/50 rounded-md text-neutral-100 font-semibold text-lg">
-              <AiOutlineInfoCircle size={30} />
-              <span>More Info</span>
-            </button>
-          </div>
+          {/* More Info */}
+          <button className="flex items-center justify-center gap-2 w-40 h-12 bg-neutral-500/80 hover:bg-neutral-500/50 rounded-md text-neutral-100 font-semibold text-lg">
+            <AiOutlineInfoCircle size={30} />
+            <span>More Info</span>
+          </button>
         </div>
-      )}
+      </div>
 
       {/* TODO: Trim length of video and remove black bars */}
       {/* Video */}
