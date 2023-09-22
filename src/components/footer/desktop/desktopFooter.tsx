@@ -86,7 +86,7 @@ export default function DesktopFooter() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="flex flex-col gap-6 px-5 xs:px-8 py-5 bg-neutral-900">
+    <footer className="flex flex-col gap-6 px-5 xs:px-8 lg:px-32 py-5 bg-neutral-900 text-neutral-400 ">
       {/* Social Media */}
       <ul className="flex items-center gap-4">
         {socialMedia.map(({ icon: Icon, url }, index) => (
