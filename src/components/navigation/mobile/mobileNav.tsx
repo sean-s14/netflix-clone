@@ -13,79 +13,79 @@ const tempGenres = [
   },
   {
     title: "My List",
-    href: "/browse/genre/100",
+    href: "/browse",
   },
   {
     title: "Thrillers",
-    href: "/browse/genre/101",
+    href: "/browse",
   },
   {
     title: "Crime",
-    href: "/browse/genre/102",
+    href: "/browse",
   },
   {
     title: "Kids & Family",
-    href: "/browse/genre/103",
+    href: "/browse",
   },
   {
     title: "International Films & TV",
-    href: "/browse/genre/104",
+    href: "/browse",
   },
   {
     title: "Reality TV",
-    href: "/browse/genre/105",
+    href: "/browse",
   },
   {
     title: "Action",
-    href: "/browse/genre/106",
+    href: "/browse",
   },
   {
     title: "Anime",
-    href: "/browse/genre/107",
+    href: "/browse",
   },
   {
     title: "Comedies",
-    href: "/browse/genre/108",
+    href: "/browse",
   },
   {
     title: "Fantasy",
-    href: "/browse/genre/109",
+    href: "/browse",
   },
   {
     title: "Sci-Fi",
-    href: "/browse/genre/110",
+    href: "/browse",
   },
   {
     title: "Horror",
-    href: "/browse/genre/111",
+    href: "/browse",
   },
   {
     title: "Stand-up Comedy",
-    href: "/browse/genre/112",
+    href: "/browse",
   },
   {
     title: "Documentaries",
-    href: "/browse/genre/113",
+    href: "/browse",
   },
   {
     title: "European Films & TV",
-    href: "/browse/genre/114",
+    href: "/browse",
   },
   {
     title: "Music & Musicals",
-    href: "/browse/genre/115",
+    href: "/browse",
   },
   {
     title: "Romance",
-    href: "/browse/genre/116",
+    href: "/browse",
   },
   {
     title: "Dramas",
-    href: "/browse/genre/117",
+    href: "/browse",
   },
   {
     title: "British Movies & TV",
-    href: "/browse/genre/118",
+    href: "/browse",
   },
 ];
 
@@ -175,7 +175,7 @@ export default function MobileNav() {
                 <Link href="/browse">Browse</Link>
               </li>
               <li>
-                <Link href="/browse/genre/100">Children</Link>
+                <Link href="/browse">Children</Link>
               </li>
             </ul>
           </div>

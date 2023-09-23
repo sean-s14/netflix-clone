@@ -18,11 +18,11 @@ import DesktopDropdown from "@/components/dropdown/desktopDropdown";
 
 const navLinks = [
   { title: "Home", href: "/browse" },
-  { title: "Series", href: "/browse/genre/83" },
-  { title: "Films", href: "/browse/genre/34399" },
-  { title: "New & Popular", href: "/browse/genre/6548" },
-  { title: "My List", href: "/browse/my-list" },
-  { title: "Browse by Languages", href: "/browse/languages" },
+  { title: "Series", href: "/browse" },
+  { title: "Films", href: "/browse" },
+  { title: "New & Popular", href: "/browse" },
+  { title: "My List", href: "/browse" },
+  { title: "Browse by Languages", href: "/browse" },
 ];
 
 // TODO: Update this for production
